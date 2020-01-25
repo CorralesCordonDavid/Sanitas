@@ -21,19 +21,41 @@ public class MainController {
 		
 		if(opOk1 && opOk2) {
 			
+			switch (operacion.toLowerCase()) {
+			case "suma":
+				resultado = sumaOperacion(op1,op2);
+				break;
+			case "resta":
+				resultado = restaOperacion(op1,op2);
+				break;
+			default:
+				logger.error("El parámetro operacion no coincide con ninguna operación implementada.");
+				break;
+			}
+			
 		} else {
 			
-			if(!opOk1) logger.error("Parametro 1 no numérico");
-			if(!opOk2) logger.error("Parametro 2 no numérico");
+			if(!opOk1) logger.error("Parámetro 1 no numérico");
+			if(!opOk2) logger.error("Parámetro 2 no numérico");
 		}
 		
 		return resultado;
 	}
 	
+	private int sumaOperacion(String op1, String op2) {
+		
+		return Integer.parseInt(op1) + Integer.parseInt(op2);
+	}
+	
+	private int restaOperacion(String op1, String op2) {
+	
+		return Integer.parseInt(op1) - Integer.parseInt(op2);
+	}
+	
 	private boolean comprobarParametros(String param) {
 		
 		try {
-			Integer.parseInt(param);
+			 Integer.parseInt(param);
 			return true;
 		} catch (NumberFormatException e) {
 			return false;
